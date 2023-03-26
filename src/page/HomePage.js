@@ -1,10 +1,13 @@
 import React from 'react'
-import Profile from '../components/Profile'
+import PasswordCreate from '../components/passwordCreate';
+import Navbar from '../components/Navbar';
+
 
 export default function HomePage() {
   return (
     <div>
-        <Profile/>
+        <Navbar/>
+        <PasswordCreate/>
     </div>
   )
 }
