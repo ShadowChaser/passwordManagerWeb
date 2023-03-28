@@ -2,7 +2,8 @@ import React,{useState} from 'react';
 import {FaFacebook,FaInstagram,FaYoutube} from "react-icons/fa"
 import profilepic from '../profilepic.jpg';
 import "./navbar.css";
-import {GiHamburgerMenu} from "react-icons/gi"
+import {GiHamburgerMenu} from "react-icons/gi";
+
 
 export default function Navbar() {
     const [showMediaIcons,setShowMediaIcons]=useState(false);
@@ -55,6 +56,9 @@ export default function Navbar() {
                         <GiHamburgerMenu />
                       </a>
                     </div>
+            </div>
+            <div>
+                
             </div>
         </nav>
         

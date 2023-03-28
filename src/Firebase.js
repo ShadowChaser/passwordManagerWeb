@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {getAuth,GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
-console.log(process.env)
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -17,14 +17,3 @@ const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 
 export const provider= new GoogleAuthProvider()
-
-export const signInWithGoogle= () =>{
-        signInWithPopup(auth,provider).then((result)=>{
-            const name=result.user.displayName;
-            const email=result.user.email;
-            const profilePic=result
-            console.log(result)
-        }).catch((error)=>{
-            console.log(error)
-        });
-}

@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "../context/UserContext"
 import {Navigate } from "react-router-dom";
 import {GoogleButton} from 'react-google-button';
+import "./passwordCreation.css"
 
 
 
@@ -20,7 +21,8 @@ export default function Login() {
         setUserName(result.user.displayName);
         setEmail(result.user.email)
         setUid(result.user.uid)
-        context.setUser({email: result.user.email, uid: result.user.uid})
+        context.setUser({email: result.user.email, uid: result.user.uid});
+        console.log(result)
       }).catch((error)=>{
           console.log(error)
       });
@@ -31,7 +33,13 @@ export default function Login() {
   }
     return (
       <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"space-between",flexDirection:"column",height: "80%"}}>
-        <div style={Style.signIn}><h1>Please Sign In Below</h1></div>
+        <div>
+        <section className='hero-section'>
+            <p>Welcome To</p>
+            <h1>Password Manager</h1>
+        </section>
+        </div>
+  
         <div style={Style.google}>
         <GoogleButton onClick={signInWithGoogle}/>
         </div>
