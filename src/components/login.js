@@ -5,7 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "../context/UserContext"
 import {Navigate } from "react-router-dom";
 import {GoogleButton} from 'react-google-button';
-import "./passwordCreation.css"
+import "./passwordCreation.css";
+import {AddUser} from "../services/CommonService"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -21,11 +24,21 @@ export default function Login() {
         setUserName(result.user.displayName);
         setEmail(result.user.email)
         setUid(result.user.uid)
-        context.setUser({email: result.user.email, uid: result.user.uid});
-        console.log(result)
+        context.setUser({email: result.user.email, uid: result.user.uid,firstName:result.user.displayName});
+        newUserAdd(result.user.uid,result.user.displayName,result.user.email);
       }).catch((error)=>{
           console.log(error)
       });
+  }
+
+  const newUserAdd=(u_id,name,email)=>{
+    AddUser(u_id,name,email).
+    then((response)=>{
+      console.log("User Signed In")
+    })
+    .catch((err)=>{
+      console.log("User Logged In")
+    })
   }
 
   if(context.user?.uid){
