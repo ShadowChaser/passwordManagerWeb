@@ -4,6 +4,8 @@ import {auth,provider} from '../Firebase';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "../context/UserContext"
 import {Navigate } from "react-router-dom";
+import {GoogleButton} from 'react-google-button';
+
 
 
 export default function Login() {
@@ -28,8 +30,32 @@ export default function Login() {
     return <Navigate  to="/home"/>
   }
     return (
-      <div>
-        <button onClick={signInWithGoogle}>Sign In With Google</button>
+      <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"space-between",flexDirection:"column",height: "80%"}}>
+        <div style={Style.signIn}><h1>Please Sign In Below</h1></div>
+        <div style={Style.google}>
+        <GoogleButton onClick={signInWithGoogle}/>
+        </div>
       </div>
     );
 }
+
+
+const Style=({
+  google:{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+ },
+ signIn:{
+    marginBottom:"60",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+ },
+ container:{
+    marginBottom:"60",
+    display:"flex",
+    justifyContent: "space-around",
+    flexDirection: 'column'
+ }
+})
