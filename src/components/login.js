@@ -14,16 +14,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
     const context = useContext(UserContext);
-    const [userName,setUserName]=useState('');
-    const [email,setEmail]=useState('');
-    const [uid,setUid]=useState('');
-    
+   
   
     const signInWithGoogle= () =>{
       signInWithPopup(auth,provider).then((result)=>{
-        setUserName(result.user.displayName);
-        setEmail(result.user.email)
-        setUid(result.user.uid)
         context.setUser({email: result.user.email, uid: result.user.uid,firstName:result.user.displayName});
         newUserAdd(result.user.uid,result.user.displayName,result.user.email);
       }).catch((error)=>{
