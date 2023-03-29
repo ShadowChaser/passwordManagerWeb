@@ -3,7 +3,7 @@ import PasswordCreate from '../components/passwordCreate';
 import Navbar from '../components/Navbar';
 import { UserContext } from "../context/UserContext"
 import {Navigate } from "react-router-dom";
-
+import CardManager from '../components/CardManager';
 
 export default function HomePage() {
   const context = useContext(UserContext);
@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <div>
         <Navbar/>
-        <PasswordCreate/>
+        <CardManager/>
     </div>
   )
 }

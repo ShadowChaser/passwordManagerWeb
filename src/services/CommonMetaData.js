@@ -3,3 +3,6 @@ export const AddUserInfo=(userId,firstName,email)=>{
     "firstName":firstName,
     "email":email}
 }
+export const AddProf=(profile)=>{
+    return {"profile":profile}
+}

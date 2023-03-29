@@ -21,7 +21,7 @@ export default function Login() {
         context.setUser({email: result.user.email, uid: result.user.uid,firstName:result.user.displayName});
         newUserAdd(result.user.uid,result.user.displayName,result.user.email);
       }).catch((error)=>{
-          console.log(error)
+          console.log(error);
       });
   }
 
