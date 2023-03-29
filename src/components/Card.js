@@ -7,15 +7,13 @@ export default function card({profile}) {
     
   return (
     <div>
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+    <Card style={{ width: '18rem' ,height:'15rem' }}>
       <Card.Body>
-        <Card.Title>{profile}</Card.Title>
+        <Card.Title style={{display:"flex",justifyItems:"center"}}>{profile}</Card.Title>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          Email Id : {}
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="primary">Add Password</Button>
       </Card.Body>
     </Card>
     </div>

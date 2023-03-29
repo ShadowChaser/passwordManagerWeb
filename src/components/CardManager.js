@@ -82,11 +82,12 @@ export default function CardManager() {
         
       </Modal>
     </div>
-    <div className='d-flex flex-wrap justfy-center flex'>
-        {profiles.length ? profiles.slice(1).map((profile,i)=>{
-            return <div><Card profile={profile} /></div>
-          }):<></>}
-    </div>
+        <div className='d-flex flex-wrap justify-content-center w-1/2'>
+          {profiles.length ? profiles.slice(1).map((profile,i)=>{
+              return <div key={i}><Card profile={profile} /></div>
+            }):<></>}
+        </div>
+
     </div>
   )
 }
