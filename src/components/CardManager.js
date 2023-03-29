@@ -19,7 +19,7 @@ export default function CardManager() {
     }).catch((err)=>{
       console.log(err)
     })
-  }, [context.user.uid])
+  }, [])
   
   
 
@@ -33,12 +33,12 @@ export default function CardManager() {
     })
   }
   return (
-    <div >
-       <div className="d-grid gap-2">
+    <div>
+       <div className="d-flex justify-content-center p-4 gap-2 w-full">
             <Button variant="primary" size="lg" onClick={()=>setIsOpen(true)}>
                 Create a Password Profile
             </Button>
-    </div>
+      </div>
     
     <div>
       <Modal isOpen={isOpen} onRequestClose={()=>setIsOpen(false)} style={{
@@ -82,12 +82,25 @@ export default function CardManager() {
         
       </Modal>
     </div>
-        <div className='d-flex flex-wrap justify-content-center w-1/2'>
+        <div  style={Styles.container}>
           {profiles.length ? profiles.slice(1).map((profile,i)=>{
-              return <div key={i}><Card profile={profile} /></div>
+              return <div key={i} className="p-2"><Card profile={profile} /></div>
             }):<></>}
         </div>
 
     </div>
   )
 }
+
+const Styles=({
+  container:{
+    position: "absolute",
+    flexDirection: "row",
+    width:"60%",
+    display:"flex",
+    justifyContent:"center",
+    flexWrap:"wrap",
+    alignItems:"center",
+    marginLeft:"20%"
+  }
+})
