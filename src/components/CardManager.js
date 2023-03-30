@@ -1,11 +1,12 @@
 import React,{useState,useEffect,useContext} from 'react';
 import Button from 'react-bootstrap/Button';
-import Card from './Card';
+import ProfileCard from './Card';
 import Modal from 'react-modal';
 import {FaWindowClose} from "react-icons/fa";
 import Form from 'react-bootstrap/Form';
 import { UserContext } from "../context/UserContext"
-import { AddProfile,getUser } from '../services/CommonService';
+import { AddProfile,GetUser } from '../services/CommonService';
+
 
 export default function CardManager() {
   const context = useContext(UserContext);
@@ -14,7 +15,7 @@ export default function CardManager() {
   const [profiles,setProfiles]=useState([]);
 
   useEffect(() => {
-    getUser(context.user.uid).then((response)=>{
+    GetUser(context.user.uid,context.user.token).then((response)=>{
       setProfiles(response.profiles);
     }).catch((err)=>{
       console.log(err)
@@ -25,7 +26,7 @@ export default function CardManager() {
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-    AddProfile(context.user.uid,profileName).then((response)=>{
+    AddProfile(context.user.uid,profileName,context.user.token).then((response)=>{
       setProfiles(response.profiles);
       setIsOpen(false);
     }).catch((err)=>{
@@ -84,7 +85,7 @@ export default function CardManager() {
     </div>
         <div  style={Styles.container}>
           {profiles.length ? profiles.slice(1).map((profile,i)=>{
-              return <div key={i} className="p-2"><Card profile={profile} /></div>
+              return <div key={i} className="p-2"><ProfileCard profile={profile} /></div>
             }):<></>}
         </div>
 

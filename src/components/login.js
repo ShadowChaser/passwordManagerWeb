@@ -14,12 +14,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
     const context = useContext(UserContext);
-   
-  
     const signInWithGoogle= () =>{
       signInWithPopup(auth,provider).then((result)=>{
-        context.setUser({email: result.user.email, uid: result.user.uid,firstName:result.user.displayName});
-        newUserAdd(result.user.uid,result.user.displayName,result.user.email);
+        context.setUser({email: result.user.email, uid: result.user.uid,firstName:result.user.displayName,token:result._tokenResponse.idToken});
+        console.log(`Bearer ` + result._tokenResponse.idToken)
+        newUserAdd(result.user.uid,result.user.displayName,result.user.email,result._tokenResponse.idToken);
       }).catch((error)=>{
           console.log(error);
       });
