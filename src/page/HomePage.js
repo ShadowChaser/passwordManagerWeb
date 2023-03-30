@@ -1,5 +1,4 @@
-import React,{useContext} from 'react'
-import PasswordCreate from '../components/passwordCreate';
+import React,{useContext} from 'react';
 import Navbar from '../components/Navbar';
 import { UserContext } from "../context/UserContext"
 import {Navigate } from "react-router-dom";

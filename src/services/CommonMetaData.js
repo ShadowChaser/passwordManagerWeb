@@ -6,3 +6,6 @@ export const AddUserInfo=(userId,firstName,email)=>{
 export const AddProf=(profile)=>{
     return {"profile":profile}
 }
+export const AddPass=(password,email,color)=>{
+    return {"password":password,"email":email,"color":color}
+}

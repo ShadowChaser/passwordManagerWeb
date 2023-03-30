@@ -2,9 +2,7 @@ import React,{useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-modal';
-import {FaWindowClose} from "react-icons/fa";
 import GeneratePass from './GeneratePass'
-import './passwordCreation.css';
 
 export default function ProfileCard({profile}) {
   const [isOpen,setIsOpen]=useState(false);
@@ -35,7 +33,7 @@ export default function ProfileCard({profile}) {
         }
       }}>
         
-        <GeneratePass/>
+        <GeneratePass profile={profile} setIsOpen={setIsOpen}/>
         
       </Modal>
     </div>:<></>}

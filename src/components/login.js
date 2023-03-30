@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "../context/UserContext"
 import {Navigate } from "react-router-dom";
 import {GoogleButton} from 'react-google-button';
-import "./passwordCreation.css";
 import {AddUser} from "../services/CommonService"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,14 +37,8 @@ export default function Login() {
     return <Navigate  to="/home"/>
   }
     return (
-      <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"space-between",flexDirection:"column",height: "80%"}}>
-        <div>
-        <section className='hero-section'>
-            <p>Welcome To</p>
-            <h1>Password Manager</h1>
-        </section>
-        </div>
-  
+      <div >
+        
         <div style={Style.google}>
         <GoogleButton onClick={signInWithGoogle}/>
         </div>
@@ -58,18 +51,6 @@ const Style=({
   google:{
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
- },
- signIn:{
-    marginBottom:"60",
-    display: "flex",
-    justifyContent: "center",
     alignItems: "center",
- },
- container:{
-    marginBottom:"60",
-    display:"flex",
-    justifyContent: "space-around",
-    flexDirection: 'column'
- }
-})
+    height: "100vh"
+}})
