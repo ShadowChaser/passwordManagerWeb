@@ -1,13 +1,12 @@
-import React,{useState,useContext,useEffect} from 'react';
+import React,{useState,useContext} from 'react';
 import Checkbox from './Checkbox';
 import './generatePass.css';
 import {AddPassword} from '../services/CommonService';
 import { UserContext } from "../context/UserContext";
 import { SketchPicker } from "react-color";
 import {FaWindowClose} from "react-icons/fa";
-import { GetProfileData } from '../services/CommonService';
 
-export default function GeneratePass({profile,setIsOpen}) {
+export default function EditPupUp({profile,setIsOpen}) {
     const [passwordGen, setPasswordGen] = useState({
         length: 5,
         uppercase: false,
@@ -17,10 +16,9 @@ export default function GeneratePass({profile,setIsOpen}) {
       });
       const [handelText, setHandelText] = useState('');
       const [copied, setCopied] = useState(false);
-      const [sketchPickerColor, setSketchPickerColor] = useState("#37d67a");
+      const [color,setColor]=useState("#37d67a");
       const context = useContext(UserContext);
       const [openPicker,setOpenPicker]=useState(false);
-
       const handleChangeUppercase = () => {
         setPasswordGen({
           ...passwordGen,
@@ -93,7 +91,7 @@ export default function GeneratePass({profile,setIsOpen}) {
       }
 
       const savePass=()=>{
-          AddPassword(context.user?.uid,profile,handelText,context.user?.email,sketchPickerColor,context.user?.token).then((response)=>{
+          AddPassword(context.user?.uid,profile,handelText,context.user?.email,color,context.user?.token).then((response)=>{
             setIsOpen(false);
             console.log("Password saved")
           }).catch((error)=>{
@@ -107,13 +105,16 @@ export default function GeneratePass({profile,setIsOpen}) {
 
             <div class="d-flex bd-highlight mb-3">
           <div class="p-2 bd-highlight">
-              <h1>Password Generator</h1>
+              <h1>Edit Profile</h1>
           </div>
             <div class="ms-auto p-2 bd-highlight">
               <FaWindowClose size={30} onClick={()=>setIsOpen(false)}/>
             </div>
         </div>
             <div className="password-box">
+            <div>
+                <h2>Profile</h2>
+              </div>
               <input
                 type="text"
                 value={handelText}
@@ -121,104 +122,32 @@ export default function GeneratePass({profile,setIsOpen}) {
                 autoComplete="off"
                 onChange={(e) => setHandelText(e.target.value)}
               />
-              <button
-                className="copy-button"
-                onClick={() => {
-                  if (handelText.length > 0) {
-                    navigator.clipboard.writeText(handelText);
-                    setCopied(true);
-                    setInterval(() => {
-                      setCopied(false);
-                    }, 2000);
-                  }
-                }}
-              >
-                {copied ? 'Copied!' : 'Copy text'}
-              </button>
             </div>
             <br />
-            <div className="word-crieteria__box">
-              <div>
-                <label>Password length</label>
-              </div>
-              <div>
-                <input
-                  type="number"
-                  min="4"
-                  max="20"
-                  value={passwordGen.length}
-                  onChange={(e) => setPasswordLength(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="word-crieteria__box">
-              <div>
-                <label>Include uppercase letters</label>
-              </div>
-              <div>
-                <Checkbox
-                  value={passwordGen.uppercase}
-                  onChange={handleChangeUppercase}
-                />
-              </div>
-            </div>
-            <div className="word-crieteria__box">
-              <div>
-                <label>Include lowercase letters</label>
-              </div>
-              <div>
-                <Checkbox
-                  value={passwordGen.lowercase}
-                  onChange={handleChangeLowercase}
-                />
-              </div>
-            </div>
-            <div className="word-crieteria__box">
-              <div>
-                <label>Include numbers</label>
-              </div>
-              <div>
-                <Checkbox
-                  value={passwordGen.numbers}
-                  onChange={handleChangeNumbers}
-                />
-              </div>
-            </div>
-            <div className="word-crieteria__box">
-              <div>
-                <label>Include symbols</label>
-              </div>
-              <div>
-                <Checkbox
-                  value={passwordGen.symbols}
-                  onChange={handleChangeSymbols}
-                />
-              </div>
-              <div className="sketchpicker" style={{display:"flex",flexDirection:'row'}}>
-        <h6 style={{marginTop:"5px",marginRight:"5px"}}>Sketch Picker</h6>
-        
-        <div
-          style={{
-            backgroundColor: sketchPickerColor,
-            width: 25,
-            height: 25,
-            border: "2px solid white",
-          }}
-             onClick={(e)=>setOpenPicker(!openPicker)}></div>
-        {/* Sketch Picker from react-color and handling color on onChange event */}
-        {openPicker? <SketchPicker
-          onChange={(color) => {
-            setSketchPickerColor(color.hex);
-          }}
-          color={sketchPickerColor}
-        />:null}
-       
-      </div>
-            </div>
+            <div className="password-box">
             <div>
-              <button className="generate-button" onClick={generatePassword}>
-                Generate password
-              </button>
+                <h2>Password</h2>
+              </div>
+              <input
+                type="text"
+                value={handelText}
+                placeholder=""
+                autoComplete="off"
+                onChange={(e) => setHandelText(e.target.value)}
+              />
+            </div>
+            <br />
+            <div className="password-box">
+            <div>
+                <h2>Password</h2>
+              </div>
+              <input
+                type="text"
+                value={handelText}
+                placeholder=""
+                autoComplete="off"
+                onChange={(e) => setHandelText(e.target.value)}
+              />
             </div>
             <div>
               <button className="generate-button" onClick={savePass}>

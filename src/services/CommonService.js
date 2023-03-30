@@ -32,6 +32,18 @@ export async function GetUser(id,token){
         return response.data;
     throw response;
 }
+export async function GetProfileData(id,profile,token){
+
+    const url=process.env.REACT_APP_API_URL+"/v1/password/"+`${id}`+`/${profile}`;
+    const response=await axios.get(url,config,{
+        headers:{
+            Authorization: `Bearer ` + token
+        }
+    });
+    if(response.status===200 || response.status===201)
+        return response.data;
+    throw response;
+}
 
 export async function AddProfile(userId,profile,token){
 
