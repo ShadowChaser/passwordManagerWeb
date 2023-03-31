@@ -1,104 +1,50 @@
 import React,{useState,useContext} from 'react';
-import Checkbox from './Checkbox';
 import './generatePass.css';
-import {AddPassword} from '../services/CommonService';
+import {UpdatePassword, GetProfileData} from '../services/CommonService';
 import { UserContext } from "../context/UserContext";
 import { SketchPicker } from "react-color";
 import {FaWindowClose} from "react-icons/fa";
+import { useEffect } from 'react';
+
 
 export default function EditPupUp({profile,setIsOpen}) {
-    const [passwordGen, setPasswordGen] = useState({
-        length: 5,
-        uppercase: false,
-        lowercase: false,
-        numbers: false,
-        symbols: false,
-      });
-      const [handelText, setHandelText] = useState('');
-      const [copied, setCopied] = useState(false);
-      const [color,setColor]=useState("#37d67a");
-      const context = useContext(UserContext);
-      const [openPicker,setOpenPicker]=useState(false);
-      const handleChangeUppercase = () => {
-        setPasswordGen({
-          ...passwordGen,
-          uppercase: !passwordGen.uppercase,
-        });
-      };
-    
-      const handleChangeLowercase = () => {
-        setPasswordGen({
-          ...passwordGen,
-          lowercase: !passwordGen.lowercase,
-        });
-      };
-    
-      const handleChangeNumbers = () => {
-        setPasswordGen({
-          ...passwordGen,
-          numbers: !passwordGen.numbers,
-        });
-      };
-    
-      const handleChangeSymbols = () => {
-        setPasswordGen({
-          ...passwordGen,
-          symbols: !passwordGen.symbols,
-        });
-      };
-    
-      const setPasswordLength = (val) => {
-        setPasswordGen({
-          ...passwordGen,
-          length: val,
-        });
-      };
-    
-      function generatePassword() {
-        const numbersArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-        const symbolsArray = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')'];
-    
-        const characterCodes = Array.from(Array(26)).map((_e, i) => i + 97);
-        const lowerCaseLetters = characterCodes.map((code) =>
-          String.fromCharCode(code)
-        );
-        const upperCaseLetters = lowerCaseLetters.map((letter) =>
-          letter.toUpperCase()
-        );
-    
-        const { length, uppercase, lowercase, numbers, symbols } = passwordGen;
-    
-        const generateTheWord = (
-          length,
-          uppercase,
-          lowercase,
-          numbers,
-          symbols
-        ) => {
-          const availableCharacters = [
-            ...(lowercase ? lowerCaseLetters : []),
-            ...(uppercase ? upperCaseLetters : []),
-            ...(numbers ? numbersArray : []),
-            ...(symbols ? symbolsArray : []),
-          ];
-          const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
-          const characters = shuffleArray(availableCharacters).slice(0, length);
-          setHandelText(characters.join(''));
-          return characters;
-        };
-    
-        generateTheWord(length, uppercase, lowercase, numbers, symbols);
-      }
+    const context = useContext(UserContext);
+    const [prof,setProf]=useState(profile);
+    const [pass,setPass]=useState()
+    const [email,setEmail]=useState();
+    const [sketchPickerColor,setSketchPickerColor]=useState();
+    const [openPicker,setOpenPicker]=useState(false);
 
-      const savePass=()=>{
-          AddPassword(context.user?.uid,profile,handelText,context.user?.email,color,context.user?.token).then((response)=>{
-            setIsOpen(false);
-            console.log("Password saved")
-          }).catch((error)=>{
-          console.log(error);
-      });
-      }
-      
+    useEffect(()=>{
+      GetProfileData(context.user?.uid,prof,context.user.token).then((response)=>{
+        setSketchPickerColor(response[0].color);
+        setEmail(response[0].email);
+        setPass(response[0].password);
+        setProf(response[0].profileName);
+        setSketchPickerColor(response[0].color);
+      }).catch((err)=>console.log(err))
+
+    },[])
+    useEffect(()=>{
+      GetProfileData(context.user?.uid,prof,context.user.token).then((response)=>{
+        setSketchPickerColor(response[0].color);
+        setEmail(response[0].email);
+        setPass(response[0].password);
+        setProf(response[0].profileName);
+        setSketchPickerColor(response[0].color);
+      }).catch((err)=>console.log(err))
+
+    },[openPicker])
+    
+    
+    const saveProfile=()=>{
+      UpdatePassword(context.user?.uid,profile,pass,prof,email,sketchPickerColor,context.user.token).then((response)=>{
+        setIsOpen(false);
+        setEmail(response[0].email);
+        setPass(response[0].password);
+        console.log("Profile Updated");
+      }).catch((err)=>console.log(err))
+    }
       return (
         <div className="wrapper">
           <div className="container wrapper-box">
@@ -117,10 +63,23 @@ export default function EditPupUp({profile,setIsOpen}) {
               </div>
               <input
                 type="text"
-                value={handelText}
-                placeholder=""
+                value={prof}
+                placeholder="Profile Name"
                 autoComplete="off"
-                onChange={(e) => setHandelText(e.target.value)}
+                onChange={(e) => setProf(e.target.value)}
+              />
+            </div>
+            <br />
+            <div className="password-box">
+            <div>
+                <h2>Email</h2>
+              </div>
+              <input
+                type="text"
+                value={email}
+                placeholder="Email"
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <br />
@@ -130,27 +89,35 @@ export default function EditPupUp({profile,setIsOpen}) {
               </div>
               <input
                 type="text"
-                value={handelText}
-                placeholder=""
+                value={pass}
+                placeholder="Password"
                 autoComplete="off"
-                onChange={(e) => setHandelText(e.target.value)}
+                onChange={(e) => setPass(e.target.value)}
               />
             </div>
-            <br />
-            <div className="password-box">
+      <div className="sketchpicker" style={{display:"flex",flexDirection:'row',marginTop:"10px",marginRight:"5px"}} >
+        <h2>Color</h2>
+        
+        <div
+          style={{
+            backgroundColor: sketchPickerColor,
+            width: 25,
+            height: 25,
+            border: "2px solid white",
+            marginLeft:"10px"
+          }}
+             onClick={(e)=>setOpenPicker(!openPicker)}></div>
+        {/* Sketch Picker from react-color and handling color on onChange event */}
+        {openPicker? <SketchPicker
+          onChange={(color) => {
+            setSketchPickerColor(color.hex);
+          }}
+          color={sketchPickerColor}
+        />:null}
+       
+      </div>
             <div>
-                <h2>Password</h2>
-              </div>
-              <input
-                type="text"
-                value={handelText}
-                placeholder=""
-                autoComplete="off"
-                onChange={(e) => setHandelText(e.target.value)}
-              />
-            </div>
-            <div>
-              <button className="generate-button" onClick={savePass}>
+              <button className="generate-button" onClick={saveProfile}>
                 Save
               </button>
             </div>

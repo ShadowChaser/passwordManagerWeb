@@ -36,13 +36,17 @@ export default function ProfileCard({profile}) {
               <h4>{profile}</h4>
           </div>
             <div class="ms-auto p-2 bd-highlight">
-              <FaEdit size={18} onClick={()=>setIsOpenEdit(true)}/>
+              <FaEdit size={18} onClick={(e)=>{
+                
+                setIsOpenEdit(true)}}/>
             </div>
         </div>
         <Card.Text>
           Email Id : {data?data.email:""}
         </Card.Text>
-        <Button variant="primary" style={{ marginTop:"5rem"}} onClick={()=>setIsOpen(true)}>Add Password</Button>
+        <Button variant="primary" style={{ marginTop:"5rem"}} onClick={(e)=>{
+           
+          setIsOpen(true)}}>Add Password</Button>
       </Card.Body>
     </Card>
     </div>

@@ -1,11 +1,10 @@
-import React,{useState,useContext,useEffect} from 'react';
+import React,{useState,useContext} from 'react';
 import Checkbox from './Checkbox';
 import './generatePass.css';
 import {AddPassword} from '../services/CommonService';
 import { UserContext } from "../context/UserContext";
 import { SketchPicker } from "react-color";
 import {FaWindowClose} from "react-icons/fa";
-import { GetProfileData } from '../services/CommonService';
 
 export default function GeneratePass({profile,setIsOpen}) {
     const [passwordGen, setPasswordGen] = useState({
@@ -20,6 +19,7 @@ export default function GeneratePass({profile,setIsOpen}) {
       const [sketchPickerColor, setSketchPickerColor] = useState("#37d67a");
       const context = useContext(UserContext);
       const [openPicker,setOpenPicker]=useState(false);
+      const [email,setEmail]=useState();
 
       const handleChangeUppercase = () => {
         setPasswordGen({
@@ -93,7 +93,8 @@ export default function GeneratePass({profile,setIsOpen}) {
       }
 
       const savePass=()=>{
-          AddPassword(context.user?.uid,profile,handelText,context.user?.email,sketchPickerColor,context.user?.token).then((response)=>{
+          
+          AddPassword(context.user?.uid,profile,handelText,email,sketchPickerColor,context.user?.token).then((response)=>{
             setIsOpen(false);
             console.log("Password saved")
           }).catch((error)=>{
@@ -135,6 +136,19 @@ export default function GeneratePass({profile,setIsOpen}) {
               >
                 {copied ? 'Copied!' : 'Copy text'}
               </button>
+            </div>
+            <br />
+            <div className="password-box">
+            <div style={{marginTop:"8px"}}>
+                <h2>Email</h2>
+              </div>
+              <input
+                type="text"
+                value={email}
+                placeholder="Email"
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <br />
             <div className="word-crieteria__box">
@@ -195,7 +209,7 @@ export default function GeneratePass({profile,setIsOpen}) {
                 />
               </div>
               <div className="sketchpicker" style={{display:"flex",flexDirection:'row'}}>
-        <h6 style={{marginTop:"5px",marginRight:"5px"}}>Sketch Picker</h6>
+        <h6 style={{marginTop:"5px",marginRight:"5px"}}>Color</h6>
         
         <div
           style={{

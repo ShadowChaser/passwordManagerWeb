@@ -9,3 +9,6 @@ export const AddProf=(profile)=>{
 export const AddPass=(password,email,color)=>{
     return {"password":password,"email":email,"color":color}
 }
+export const UpdatePass=(updatedProfile,password,email,color)=>{
+    return {"profile":updatedProfile,"password":password,"email":email,"color":color}
+}
