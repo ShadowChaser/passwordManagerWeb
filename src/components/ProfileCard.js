@@ -40,7 +40,7 @@ export default function ProfileCard({profile}) {
             </div>
         </div>
         <Card.Text>
-          Email Id : {data.email}
+          Email Id : {data?data.email:""}
         </Card.Text>
         <Button variant="primary" style={{ marginTop:"5rem"}} onClick={()=>setIsOpen(true)}>Add Password</Button>
       </Card.Body>

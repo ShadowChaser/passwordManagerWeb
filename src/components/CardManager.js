@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react';
 import Button from 'react-bootstrap/Button';
-import ProfileCard from './Card';
+import ProfileCard from './ProfileCard';
 import Modal from 'react-modal';
 import {FaWindowClose} from "react-icons/fa";
 import Form from 'react-bootstrap/Form';
@@ -83,7 +83,7 @@ export default function CardManager() {
         
       </Modal>
     </div>
-        <div  style={Styles.container}>
+      <div  style={Styles.container}>
           {profiles.length ? profiles.slice(1).map((profile,i)=>{
               return <div key={i} className="p-2"><ProfileCard profile={profile} /></div>
             }):<></>}
