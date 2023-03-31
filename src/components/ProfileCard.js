@@ -13,18 +13,31 @@ export default function ProfileCard({profile}) {
   const [isOpen,setIsOpen]=useState(false);
   const [isOpenEdit,setIsOpenEdit]=useState(false);
   const [data,setData]=useState();
+  const [currProfile,setCurrProfile]=useState(profile);
   useEffect(()=>{
-    GetProfileData(context.user?.uid,profile,context.user.token).then((response)=>{
+    GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
       setData(response[0]);
     }
     ).catch((err)=>console.log(err))
   },[])
   useEffect(()=>{
-    GetProfileData(context.user?.uid,profile,context.user.token).then((response)=>{
+    GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
       setData(response[0]);
     }
     ).catch((err)=>console.log(err))
   },[isOpen])
+  useEffect(()=>{
+    GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
+      setData(response[0]);
+    }
+    ).catch((err)=>console.log(err))
+  },[isOpenEdit])
+  useEffect(()=>{
+    GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
+      setData(response[0]);
+    }
+    ).catch((err)=>console.log(err))
+  },[currProfile])
   return (
     <div>
       <div>
@@ -37,7 +50,6 @@ export default function ProfileCard({profile}) {
           </div>
             <div class="ms-auto p-2 bd-highlight">
               <FaEdit size={18} onClick={(e)=>{
-                
                 setIsOpenEdit(true)}}/>
             </div>
         </div>
@@ -82,7 +94,7 @@ export default function ProfileCard({profile}) {
         }
       }}>
         
-        <EditPupUp profile={profile} setIsOpen={setIsOpenEdit}/>
+        <EditPupUp profile={profile} setCurrProfile={setCurrProfile} setIsOpen={setIsOpenEdit}/>
         
       </Modal>:<></>
     }

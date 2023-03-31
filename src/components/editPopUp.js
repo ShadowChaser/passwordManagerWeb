@@ -7,7 +7,7 @@ import {FaWindowClose} from "react-icons/fa";
 import { useEffect } from 'react';
 
 
-export default function EditPupUp({profile,setIsOpen}) {
+export default function EditPupUp({profile,setCurrProfile,setIsOpen}) {
     const context = useContext(UserContext);
     const [prof,setProf]=useState(profile);
     const [pass,setPass]=useState()
@@ -20,28 +20,29 @@ export default function EditPupUp({profile,setIsOpen}) {
         setSketchPickerColor(response[0].color);
         setEmail(response[0].email);
         setPass(response[0].password);
-        setProf(response[0].profileName);
         setSketchPickerColor(response[0].color);
       }).catch((err)=>console.log(err))
 
     },[])
-    useEffect(()=>{
+    
+    let getProfile=()=>{
       GetProfileData(context.user?.uid,prof,context.user.token).then((response)=>{
         setSketchPickerColor(response[0].color);
         setEmail(response[0].email);
         setPass(response[0].password);
-        setProf(response[0].profileName);
         setSketchPickerColor(response[0].color);
       }).catch((err)=>console.log(err))
-
-    },[openPicker])
-    
+    }
     
     const saveProfile=()=>{
-      UpdatePassword(context.user?.uid,profile,pass,prof,email,sketchPickerColor,context.user.token).then((response)=>{
+      UpdatePassword(context.user?.uid,profile,prof,pass,email,sketchPickerColor,context.user.token).then((response)=>{
         setIsOpen(false);
-        setEmail(response[0].email);
-        setPass(response[0].password);
+        setEmail(response.p1.email);
+        setPass(response.p1.password);
+        setProf(response.p1.profileName)
+        setSketchPickerColor(response.p1.color);
+        setCurrProfile(prof);
+        getProfile();
         console.log("Profile Updated");
       }).catch((err)=>console.log(err))
     }
