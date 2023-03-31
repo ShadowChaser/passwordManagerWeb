@@ -46,7 +46,7 @@ export default function ProfileCard({profile}) {
         
         <div class="d-flex bd-highlight mb-3">
           <div class="p-2 bd-highlight">
-              <h4>{profile}</h4>
+              <h4>{currProfile}</h4>
           </div>
             <div class="ms-auto p-2 bd-highlight">
               <FaEdit size={18} onClick={(e)=>{

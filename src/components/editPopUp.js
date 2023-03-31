@@ -16,13 +16,7 @@ export default function EditPupUp({profile,setCurrProfile,setIsOpen}) {
     const [openPicker,setOpenPicker]=useState(false);
 
     useEffect(()=>{
-      GetProfileData(context.user?.uid,prof,context.user.token).then((response)=>{
-        setSketchPickerColor(response[0].color);
-        setEmail(response[0].email);
-        setPass(response[0].password);
-        setSketchPickerColor(response[0].color);
-      }).catch((err)=>console.log(err))
-
+      getProfile()
     },[])
     
     let getProfile=()=>{
@@ -42,7 +36,6 @@ export default function EditPupUp({profile,setCurrProfile,setIsOpen}) {
         setProf(response.p1.profileName)
         setSketchPickerColor(response.p1.color);
         setCurrProfile(prof);
-        getProfile();
         console.log("Profile Updated");
       }).catch((err)=>console.log(err))
     }
