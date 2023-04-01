@@ -34,7 +34,7 @@ export default function Login() {
   }
 
   if(context.user?.uid){
-    return <Navigate  to="/home"/>
+    return <Navigate  to="/"/>
   }
     return (
       <div >
