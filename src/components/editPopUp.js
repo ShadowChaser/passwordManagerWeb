@@ -31,7 +31,6 @@ export default function EditPupUp({profile,setCurrProfile,setIsOpen}) {
     
     const saveProfile=()=>{
       UpdatePassword(context.user?.uid,profile,prof,pass,email,sketchPickerColor,context.user.token).then((response)=>{
-        debugger;
         setIsOpen(false);
         setEmail(response.p1.email);
         setPass(response.p1.password);

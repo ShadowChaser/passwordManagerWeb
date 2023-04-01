@@ -25,7 +25,7 @@ export default function ProfileCard({profile}) {
       setData(response[0]);
     }
     ).catch((err)=>console.log(err))
-  },[currProfile])
+  },[isOpenEdit])
   
   
   return (
