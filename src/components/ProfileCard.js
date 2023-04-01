@@ -20,6 +20,13 @@ export default function ProfileCard({profile}) {
     }
     ).catch((err)=>console.log(err))
   },[])
+  useEffect(()=>{
+    GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
+      setData(response[0]);
+    }
+    ).catch((err)=>console.log(err))
+  },[currProfile])
+  
   
   return (
     <div>
@@ -58,7 +65,7 @@ export default function ProfileCard({profile}) {
         }
       }}>
         
-        <EditPupUp profile={profile} setCurrProfile={setCurrProfile} setIsOpen={setIsOpenEdit}/>
+        <EditPupUp profile={currProfile} setCurrProfile={setCurrProfile} setIsOpen={setIsOpenEdit}/>
         
       </Modal>:<></>
     }
