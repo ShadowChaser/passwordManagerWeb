@@ -22,6 +22,13 @@ export default function GeneratePass({setIsOpen}) {
       const [email,setEmail]=useState();
       const [profileName,setProfileName]=useState();
 
+      const clear=()=>{
+        setHandelText();
+        setSketchPickerColor();
+        setEmail();
+        setProfileName();
+      }
+
       const handleChangeUppercase = () => {
         setPasswordGen({
           ...passwordGen,
@@ -94,9 +101,9 @@ export default function GeneratePass({setIsOpen}) {
       }
 
       const savePass=()=>{
-          debugger;
           AddPassword(context.user?.uid,profileName,email,handelText,sketchPickerColor,context.user?.token).then((response)=>{
             setIsOpen(false);
+            clear();
             console.log("Password saved")
           }).catch((error)=>{
           console.log(error);

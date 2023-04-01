@@ -20,24 +20,7 @@ export default function ProfileCard({profile}) {
     }
     ).catch((err)=>console.log(err))
   },[])
-  // useEffect(()=>{
-  //   GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
-  //     setData(response[0]);
-  //   }
-  //   ).catch((err)=>console.log(err))
-  // },[isOpen])
-  // useEffect(()=>{
-  //   GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
-  //     setData(response[0]);
-  //   }
-  //   ).catch((err)=>console.log(err))
-  // },[isOpenEdit])
-  // useEffect(()=>{
-  //   GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
-  //     setData(response[0]);
-  //   }
-  //   ).catch((err)=>console.log(err))
-  // },[currProfile])
+  
   return (
     <div>
       <div>

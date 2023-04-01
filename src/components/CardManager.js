@@ -21,6 +21,13 @@ export default function CardManager() {
       console.log(err)
     })
   }, [])
+  useEffect(() => {
+    GetUser(context.user.uid,context.user.token).then((response)=>{
+      setProfiles(response.profiles);
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }, [isOpen])
   
   
   return (
