@@ -57,10 +57,10 @@ export async function AddProfile(userId,profile,token){
         return response.data;
     throw response;
 }
-export async function AddPassword(userId,profile,password,email,color,token){
-    
-    const url=process.env.REACT_APP_API_URL+"/v1/password/Add"+`/${userId}`+`/${profile}`;
-    const response=await axios.post(url,AddPass(password,email,color),config,{
+export async function AddPassword(userId,profile,email,password,color,token){
+    debugger;
+    const url=process.env.REACT_APP_API_URL+"/v1/user"+`/${userId}`;
+    const response=await axios.patch(url,AddPass(profile,email,password,color),config,{
         headers:{
             Authorization: `Bearer ` + token
         }

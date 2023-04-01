@@ -6,12 +6,12 @@ import {FaWindowClose} from "react-icons/fa";
 import Form from 'react-bootstrap/Form';
 import { UserContext } from "../context/UserContext"
 import { AddProfile,GetUser } from '../services/CommonService';
+import GeneratePass from './GeneratePass';
 
 
 export default function CardManager() {
   const context = useContext(UserContext);
   const [isOpen,setIsOpen]=useState(false);
-  const [profileName,setProfileName]=useState("");
   const [profiles,setProfiles]=useState([]);
 
   useEffect(() => {
@@ -23,16 +23,6 @@ export default function CardManager() {
   }, [])
   
   
-
-  const handleSubmit=(e)=>{
-    e.preventDefault();
-    AddProfile(context.user.uid,profileName,context.user.token).then((response)=>{
-      setProfiles(response.profiles);
-      setIsOpen(false);
-    }).catch((err)=>{
-      console.log(err)
-    })
-  }
   return (
     <div>
        <div className="d-flex justify-content-center p-4 gap-2 w-full">
@@ -54,32 +44,7 @@ export default function CardManager() {
           transform: 'translate(-50%, -50%)',
         }
       }}>
-        <div class="d-flex bd-highlight mb-3">
-          <div class="p-2 bd-highlight">
-              <h1>Enter Profile Details To Save</h1>
-          </div>
-            <div class="ms-auto p-2 bd-highlight">
-              <FaWindowClose size={30} onClick={()=>setIsOpen(false)}/>
-            </div>
-        </div>
-        <div class="ms-auto p-2">
-        <div style={{ display: 'block', 
-                  width: 400, 
-                  padding: 30 }}>
-      
-      <Form style={{display:"flex",justifyItems:"space-between" ,flexDirection:"column" ,gap: "15px"}} onSubmit={handleSubmit}>
-          <Form.Group onChange={(e)=>{setProfileName(e.target.value)}}>
-              <Form.Label>Enter your Profile name:</Form.Label>
-              <Form.Control type="text" 
-                            placeholder="Enter your Profile name"/>
-            </Form.Group>
-            
-            <Button variant="primary" type="submit">
-              Click here to Create Profile
-            </Button>
-      </Form>
-    </div>
-  </div>
+        <GeneratePass setIsOpen={setIsOpen}/>
         
       </Modal>
     </div>

@@ -20,24 +20,24 @@ export default function ProfileCard({profile}) {
     }
     ).catch((err)=>console.log(err))
   },[])
-  useEffect(()=>{
-    GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
-      setData(response[0]);
-    }
-    ).catch((err)=>console.log(err))
-  },[isOpen])
-  useEffect(()=>{
-    GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
-      setData(response[0]);
-    }
-    ).catch((err)=>console.log(err))
-  },[isOpenEdit])
-  useEffect(()=>{
-    GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
-      setData(response[0]);
-    }
-    ).catch((err)=>console.log(err))
-  },[currProfile])
+  // useEffect(()=>{
+  //   GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
+  //     setData(response[0]);
+  //   }
+  //   ).catch((err)=>console.log(err))
+  // },[isOpen])
+  // useEffect(()=>{
+  //   GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
+  //     setData(response[0]);
+  //   }
+  //   ).catch((err)=>console.log(err))
+  // },[isOpenEdit])
+  // useEffect(()=>{
+  //   GetProfileData(context.user?.uid,currProfile,context.user.token).then((response)=>{
+  //     setData(response[0]);
+  //   }
+  //   ).catch((err)=>console.log(err))
+  // },[currProfile])
   return (
     <div>
       <div>
@@ -50,36 +50,17 @@ export default function ProfileCard({profile}) {
           </div>
             <div class="ms-auto p-2 bd-highlight">
               <FaEdit size={18} onClick={(e)=>{
+                e.preventDefault();
                 setIsOpenEdit(true)}}/>
             </div>
         </div>
         <Card.Text>
           Email Id : {data?data.email:""}
         </Card.Text>
-        <Button variant="primary" style={{ marginTop:"5rem"}} onClick={(e)=>{
-           
-          setIsOpen(true)}}>Add Password</Button>
       </Card.Body>
     </Card>
     </div>
-    {isOpen && !isOpenEdit?<div>
-      <Modal isOpen={isOpen} onRequestClose={()=>setIsOpen(false)} style={{
-        content:{
-          width:"500px",
-          height:"560px",
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-        }
-      }}>
-        
-        <GeneratePass profile={profile} setIsOpen={setIsOpen}/>
-        
-      </Modal>
-    </div>:<></>}
+    
     {
       isOpenEdit && !isOpen ?<Modal isOpen={isOpenEdit} onRequestClose={()=>setIsOpenEdit(false)} style={{
         content:{

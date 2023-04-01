@@ -6,7 +6,7 @@ import { UserContext } from "../context/UserContext";
 import { SketchPicker } from "react-color";
 import {FaWindowClose} from "react-icons/fa";
 
-export default function GeneratePass({profile,setIsOpen}) {
+export default function GeneratePass({setIsOpen}) {
     const [passwordGen, setPasswordGen] = useState({
         length: 5,
         uppercase: false,
@@ -20,6 +20,7 @@ export default function GeneratePass({profile,setIsOpen}) {
       const context = useContext(UserContext);
       const [openPicker,setOpenPicker]=useState(false);
       const [email,setEmail]=useState();
+      const [profileName,setProfileName]=useState();
 
       const handleChangeUppercase = () => {
         setPasswordGen({
@@ -93,8 +94,8 @@ export default function GeneratePass({profile,setIsOpen}) {
       }
 
       const savePass=()=>{
-          
-          AddPassword(context.user?.uid,profile,handelText,email,sketchPickerColor,context.user?.token).then((response)=>{
+          debugger;
+          AddPassword(context.user?.uid,profileName,email,handelText,sketchPickerColor,context.user?.token).then((response)=>{
             setIsOpen(false);
             console.log("Password saved")
           }).catch((error)=>{
@@ -148,6 +149,19 @@ export default function GeneratePass({profile,setIsOpen}) {
                 placeholder="Email"
                 autoComplete="off"
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <br />
+            <div className="password-box">
+            <div style={{marginTop:"8px"}}>
+                <h2>Profile Name</h2>
+              </div>
+              <input
+                type="text"
+                value={profileName}
+                placeholder="Profile Name"
+                autoComplete="off"
+                onChange={(e) => setProfileName(e.target.value)}
               />
             </div>
             <br />

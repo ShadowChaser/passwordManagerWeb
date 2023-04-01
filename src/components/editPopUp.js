@@ -20,6 +20,7 @@ export default function EditPupUp({profile,setCurrProfile,setIsOpen}) {
     },[])
     
     let getProfile=()=>{
+  
       GetProfileData(context.user?.uid,prof,context.user.token).then((response)=>{
         setSketchPickerColor(response[0].color);
         setEmail(response[0].email);

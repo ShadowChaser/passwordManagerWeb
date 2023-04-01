@@ -6,8 +6,12 @@ export const AddUserInfo=(userId,firstName,email)=>{
 export const AddProf=(profile)=>{
     return {"profile":profile}
 }
-export const AddPass=(password,email,color)=>{
-    return {"password":password,"email":email,"color":color}
+export const AddPass=(profile,email,password,color)=>{
+    
+    return {"profile":profile,
+    "profileEmail":email,
+    "profilePassword":password,
+    "profileColor":color}
 }
 export const UpdatePass=(updatedProfile,password,email,color)=>{
     return {"profile":updatedProfile,"password":password,"email":email,"color":color}
